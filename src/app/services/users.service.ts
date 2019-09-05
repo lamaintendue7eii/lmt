@@ -61,7 +61,7 @@ export class UsersService {
 
           console.log('email sent to ' + this.userAuth.email + '.');
         }).catch(function() {
-          // An error happened.
+         // userAuth.delete();
         });
       });
 
@@ -74,8 +74,6 @@ export class UsersService {
     // this.createUserWithEmailAndPassword(user);
     this.id = 0;
     user.id = 0;
-    console.log('au debut users a la valeur de :');
-    console.log(user);
 
     if (this.users) {
       for (const userForId of this.users) {
@@ -131,6 +129,8 @@ export class UsersService {
     }
 
   deleteUser(user: User) {
+    console.log('au debut de delete service');
+    console.log(user);
     const email = this.fs.firestore.app.auth().currentUser.email;
     this.getUserByEmail(email);
     this.fs.collection('Users').doc(user.userId).delete();
@@ -141,5 +141,7 @@ export class UsersService {
     this.fs.firestore.app.auth().signInWithEmailAndPassword(this.userByEmail.email, this.userByEmail.password );
     this.users.splice( this.users.indexOf(user), 1);
     this.emitUsersSubject();
-   }
+    console.log('Je suis dans delete service');
+    console.log('user deleted');
+  }
 }

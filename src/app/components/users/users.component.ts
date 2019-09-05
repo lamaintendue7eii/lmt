@@ -91,7 +91,12 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
 
   onDeleteButtonClick(user: User) {
-    this.usersService.deleteUser(user);
+    console.log('Je suis dans delete de comp');
+    console.log(user);
+    this.usersService.getUserByEmail(user.email);
+    this.usersService.deleteUser(this.userByEmail);
+    console.log('Je suis dans delete de comp');
+    console.log(this.userByEmail)
     this.usersMatTable._updateChangeSubscription();
   }
 
